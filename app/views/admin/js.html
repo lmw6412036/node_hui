@@ -1,0 +1,29 @@
+<script type="text/javascript" src="{{hui}}/lib/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="{{hui}}/static/h-ui/js/H-ui.min.js"></script>
+<script type="text/javascript" src="{{hui}}/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="{{hui}}/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="{{hui}}/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript" src="{{hui}}/lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="{{hui}}/../lib/jquery/jquery.cookie.js"></script>
+<script type="text/javascript">
+    var index;
+    $.ajaxSetup({
+        beforeSend:function (xhr) {
+            index=layer.load(1);
+            xhr.setRequestHeader('x-csrf-token',$.cookie('csrfToken'));
+        },
+        complete:function (xhr,ts) {
+            layer.close(index);
+        }
+    });
+
+    function api(url,data) {
+        return $.ajax({
+            url:url,
+            data:data,
+            type:"POST",
+            dataType:"json"
+        });
+    }
+
+</script>
